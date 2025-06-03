@@ -1,54 +1,74 @@
+let playerScore = 0
+let compScore = 0
+const choices = ["rock", "paper", "scissors"]
 
 function GetComputerChoice(){
-    const choices = ["rock", "paper", "scissors"]
     const num = Math.floor(Math.random() * 10) % 3
     return choices[num]
 }
 
 function GetHumanChoice(){
-    const choice = window.prompt("Your Choice?")
+    let choice = window.prompt("Your Choice?").toLowerCase()
+    while (!(choices.includes(choice))){
+        choice = window.prompt("Your Choice?").toLowerCase()
+    }
     return choice
 }
 
 function Result(x, y){
     if (x == y) {
-        return "It is a tie"
+        return "Round is a tie"
     }
 
     switch(x){
         case "rock":
             if (y == "paper"){
-                return "You Won"
+                playerScore += 1
+                return "You won the round"
+            }
+            else {
+                compScore += 1
+                return "Computer won the round"
             }
 
-            else {
-                return "Computer Won"
-            }
         case "paper":
-                if (y == "scissors"){
-                return "You Won"
+            if (y == "scissors"){
+                playerScore += 1
+                return "You won the round"
             }
 
             else {
-                return "Computer Won"
+                compScore += 1
+                return "Computer won the round"
             }
+
         case "scissors":
-                if (y == "rock"){
-                return "You Won"
+            if (y == "rock"){
+                playerScore += 1
+                return "You won the round"
             }
 
             else {
-                return "Computer Won"
+                compScore += 1
+                return "Computer won the round"
             }
 
     }
 }
 
+function PlayRound(){
+    const compChoice = GetComputerChoice()
+    const yourChoice = GetHumanChoice()
 
-const compChoice = GetComputerChoice()
-const yourChoice = GetHumanChoice()
+    console.log(`Computer Choice is ${compChoice}`)
+    console.log(`Your Choice is ${yourChoice}`)
 
-console.log(`Computer Choice is ${compChoice}`)
-console.log(`Your Choice is ${yourChoice}`)
+    console.log(Result(compChoice, yourChoice)) 
+}
 
-console.log(Result(compChoice, yourChoice))
+for (let i = 0; i < 5; i++){
+    PlayRound()
+}
+
+const winner = playerScore > compScore ? "You" : "Computer"
+console.log(`${winner} won the game`)
