@@ -98,6 +98,7 @@ buttons.forEach(button => {
 function CheckWinner(){
     if (playerScore == 5 || compScore == 5) {
         winner = playerScore > compScore ? "YOU" : "COMPUTER"
-        msgUI.textContent += `${winner} WON THE GAME!!!`
+        msgUI.textContent += `${winner} WON THE GAME!!! RELOAD THE PAGE TO PLAY AGAIN`
     }
 }
+
